@@ -9,6 +9,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import logo from "../../assests/logo.jpg";
+
 const Footer = () => {
   const { token } = useSelector((state) => state.auth);
 
@@ -18,20 +19,20 @@ const Footer = () => {
         {/* Logo */}
         <div className="flex justify-center mb-4">
           <img src={logo} alt="Logo" className="h-16 bg-white" />
-          {/* <p>Logo</p> */}
         </div>
 
         {/* Slogan and Contact */}
         <p className="mb-4">
           MP News is the best news website. It provides news from many areas.
         </p>
+
         <p className="mb-4">
           Contact us:{" "}
           <a
-            href="mailto:divyanirdhar@gmail.com"
+            href="mailto:anantvishwakarma@gmail.com"
             className="text-red-600 hover:underline"
           >
-            mpnews@gmail.com
+            anantvishwakarma@gmail.com
           </a>
         </p>
 
@@ -61,10 +62,7 @@ const Footer = () => {
           >
             <FaTwitter size={24} />
           </a>
-          <a
-            href="mailto:livebharatpur@gmail.com"
-            className="text-blue-500"
-          >
+          <a href="mailto:livebharatpur@gmail.com" className="text-blue-500">
             <FaEnvelope size={24} />
           </a>
           <a
@@ -75,6 +73,24 @@ const Footer = () => {
           >
             <FaWhatsapp size={24} />
           </a>
+        </div>
+
+        {/* Address */}
+        <div className="mb-4 text-sm">
+          <p>
+            Anant Vishwakarma <br />
+            Vivek Apartment 4, E-7, Arera Colony, Bhopal
+          </p>
+          <p>Phone: 9873237885</p>
+          <p>
+            Email:{" "}
+            <a
+              href="mailto:anantvishwakarma@gmail.com"
+              className="text-red-600 hover:underline"
+            >
+              anantvishwakarma@gmail.com
+            </a>
+          </p>
         </div>
 
         {/* Bottom Links */}
