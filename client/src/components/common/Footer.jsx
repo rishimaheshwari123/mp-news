@@ -66,7 +66,7 @@ const Footer = () => {
             <FaEnvelope size={24} />
           </a>
           <a
-            href="https://wa.me/+918005922946"
+            href="https://wa.me/+919873237885"
             target="_blank"
             rel="noopener noreferrer"
             className="text-green-500"

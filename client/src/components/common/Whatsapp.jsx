@@ -5,7 +5,7 @@ function Whatsapp() {
   return (
     <div className="fixed bottom-20 right-5">
       <a
-        href="https://wa.me/+918005922946"
+        href="https://wa.me/+919873237885"
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center gap-2 bg-green-500 p-5 rounded-full shadow-lg hover:bg-green-600 transition"
