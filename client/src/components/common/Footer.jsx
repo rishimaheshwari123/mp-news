@@ -8,7 +8,7 @@ import {
   FaWhatsapp,
   FaYoutube,
 } from "react-icons/fa";
-// import logo from "../../assests/logo.jpg";
+import logo from "../../assests/logo.jpg";
 const Footer = () => {
   const { token } = useSelector((state) => state.auth);
 
@@ -17,8 +17,8 @@ const Footer = () => {
       <div className="container mx-auto p-5 text-center">
         {/* Logo */}
         <div className="flex justify-center mb-4">
-          {/* <img src={logo} alt="Logo" className="h-16 bg-white" /> */}
-          <p>Logo</p>
+          <img src={logo} alt="Logo" className="h-16 bg-white" />
+          {/* <p>Logo</p> */}
         </div>
 
         {/* Slogan and Contact */}
@@ -62,7 +62,7 @@ const Footer = () => {
             <FaTwitter size={24} />
           </a>
           <a
-            href="mailto:Brotherlivebharatpur@gmail.com"
+            href="mailto:livebharatpur@gmail.com"
             className="text-blue-500"
           >
             <FaEnvelope size={24} />

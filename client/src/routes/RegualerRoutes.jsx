@@ -21,7 +21,7 @@ function RegualerRoutes() {
   return (
     <>
       <SubNavbar />
-      {/* <LogoSpace /> */}
+      <LogoSpace />
       <Navbar />
       {/* <StateSubcategories /> */}
       <br />
