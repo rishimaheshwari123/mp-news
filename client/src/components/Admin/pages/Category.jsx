@@ -15,17 +15,18 @@ function Category() {
   const [openCreate, setCreate] = useState(false);
   const [openEditModal, setEditModal] = useState(false);
   const [categories, setCategories] = useState([]);
-  const { token, user } = useSelector((state) => state.auth);
+  const {token  } = useSelector(state=> state.auth)
   // const[displayCate,setCat] = useState([])
+
   const [editCategory, setEditCategory] = useState({
     name: "",
     description: "",
-    // image: "",
+    image: "",
   });
   const [newCategory, setNewCategory] = useState({
     name: "",
     description: "",
-    // image: "",
+    image: "",
   });
 
   useEffect(() => {
@@ -45,7 +46,7 @@ function Category() {
     try {
       await createCategory(newCategory);
       // setCreate(false);
-      setNewCategory({ name: "", description: "" });
+      // setNewCategory({ name: "", description: "", image: "" });
       const response = await fetchCategory();
       setCategories(response?.categories);
     } catch (error) {
@@ -67,7 +68,7 @@ function Category() {
     try {
       await updateCategory(id, editCategory);
       setEditModal(false);
-      setEditCategory({ name: "", description: "" });
+      setEditCategory({ name: "", description: "", image: "" });
       const response = await fetchCategory();
       setCategories(response?.categories);
     } catch (error) {
@@ -75,17 +76,36 @@ function Category() {
     }
   };
 
-  const handleDelete = async (categoryId) => {
-    try {
-      await deleteCategory(categoryId, token);
-      setCategories((prevCategories) =>
-        prevCategories.filter((category) => category._id !== categoryId)
-      );
-    } catch (error) {
-      console.error("Failed to delete category:", error);
-      // Optionally handle error display to the user
+  const uploadImage = async (acceptedFiles) => {
+    const response = await imageUpload(acceptedFiles);
+    // console.log(response[0].url);
+
+    if (openEditModal) {
+      setEditCategory((prevState) => ({
+        ...prevState,
+        image: response[0]?.url || "", // Ensure response?.url is defined, otherwise set to an empty string or handle appropriately
+      }));
+    } else {
+      setNewCategory((prevState) => ({
+        ...prevState,
+        image: response[0]?.url || "", // Ensure response?.url is defined, otherwise set to an empty string or handle appropriately
+      }));
+
+      console.log(response[0]?.url);
     }
   };
+
+  const handleDelete = async (categoryId) => {
+    try {
+        await deleteCategory(categoryId, token);
+        setCategories(prevCategories =>
+            prevCategories.filter(category => category._id !== categoryId)
+        );
+    } catch (error) {
+        console.error('Failed to delete category:', error);
+        // Optionally handle error display to the user
+    }
+};
 
   return (
     <div className="w-11/12 mx-auto p-4">
@@ -94,14 +114,12 @@ function Category() {
       </div>
 
       <div className="flex justify-end mb-4">
-        {user?.permissions?.canAdd && (
-          <button
-            onClick={() => setCreate(!openCreate)}
-            className="flex items-center gap-2 p-2 bg-blue-950 text-white rounded-lg hover:bg-blue-900 focus:outline-none"
-          >
-            <FaPlusCircle /> Create Category
-          </button>
-        )}
+        <button
+          onClick={() => setCreate(!openCreate)}
+          className="flex items-center gap-2 p-2 bg-blue-950 text-white rounded-lg hover:bg-blue-900 focus:outline-none"
+        >
+          <FaPlusCircle /> Create Category
+        </button>
       </div>
 
       {openCreate && (
@@ -126,9 +144,9 @@ function Category() {
             className="w-full mb-2 p-2 border rounded focus:outline-none"
           />
 
-          {/* <div> */}
-          {/* Image Upload */}
-          {/* <div className="space-y-2">
+          <div>
+            {/* Image Upload */}
+            <div className="space-y-2">
               <label className="block font-medium text-gray-700">
                 Upload Images
               </label>
@@ -148,10 +166,10 @@ function Category() {
                     </section>
                   )}
                 </Dropzone>
-              </div> */}
+              </div>
 
-          {/* Display Uploaded Images */}
-          {/* <div className="flex gap-4 mt-4">
+              {/* Display Uploaded Images */}
+              <div className="flex gap-4 mt-4">
                 <div className="relative">
                   {newCategory.image !== "" && (
                     <img
@@ -163,7 +181,7 @@ function Category() {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
 
           <button
             onClick={handleCreateCategory}
@@ -180,6 +198,7 @@ function Category() {
             <tr>
               <th className="py-3 px-6 text-left">Name</th>
               <th className="py-3 px-6 text-left">Description</th>
+              <th className="py-3 px-6 text-left">Image</th>
               <th className="py-3 px-6 text-center">Actions</th>
             </tr>
           </thead>
@@ -188,24 +207,26 @@ function Category() {
               <tr key={category._id} className="hover:bg-gray-100">
                 <td className="py-4 px-6">{category.name}</td>
                 <td className="py-4 px-6">{category.description}</td>
-
+                <td className="py-4 px-6">
+                  <img
+                    src={category.image}
+                    alt={category.name}
+                    className="w-16 h-16 object-cover rounded-lg"
+                  />
+                </td>
                 <td className="py-4 px-6 text-center">
-                  {user?.permissions?.canEdit && (
-                    <button
-                      onClick={() => handleEditCategory(category._id)}
-                      className="p-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 focus:outline-none"
-                    >
-                      Edit
-                    </button>
-                  )}
-                  {user?.permissions?.canDelete && (
-                    <button
-                      onClick={() => handleDelete(category._id)}
-                      className="p-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none ml-2"
-                    >
-                      Delete
-                    </button>
-                  )}
+                  <button
+                    onClick={() => handleEditCategory(category._id)}
+                    className="p-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 focus:outline-none"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={()=>handleDelete(category._id)}
+                    className="p-2 bg-red-600 text-white rounded-lg hover:bg-red-700 focus:outline-none ml-2"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}
@@ -238,6 +259,53 @@ function Category() {
               }
               className="w-full mb-2 p-2 border rounded focus:outline-none"
             />
+         
+
+
+
+
+         <div>
+            {/* Image Upload */}
+            <div className="space-y-2">
+              <label className="block font-medium text-gray-700">
+                Upload Images
+              </label>
+              <div className="bg-white border-2 border-blue-600 p-4">
+                <Dropzone
+                  onDrop={(acceptedFiles) => uploadImage(acceptedFiles)}
+                >
+                  {({ getRootProps, getInputProps }) => (
+                    <section className="text-center">
+                      <div {...getRootProps()} className="cursor-pointer">
+                        <input {...getInputProps()} />
+                        <p>
+                          Drag 'n' drop some files here, or click to select
+                          files
+                        </p>
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
+              </div>
+
+              {/* Display Uploaded Images */}
+              <div className="flex gap-4 mt-4">
+                <div className="relative">
+                  {editCategory.image !== "" && (
+                    <img
+                      src={editCategory.image}
+                      alt=""
+                      className="w-40 h-40 object-cover rounded-lg shadow-md"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
 
             <div className="flex justify-end">
               <button

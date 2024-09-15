@@ -76,10 +76,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-black lg:bg-[#AE1416]">
+    <nav className="bg-white border-black border ">
       <div className="max-w-7xl mx-auto flex items-center justify-between py-2 px-4">
         <div className="flex">
-          <Link to="/" className="text-white lg:mr-3">
+          <Link to="/" className="text-black lg:mr-3 lg:mt-[19px]">
             <FaHome size={22} />
           </Link>
           <div className="hidden lg:flex lg:mt-[2px]">
@@ -87,9 +87,11 @@ const Navbar = () => {
               <div key={index} className="group relative z-50">
                 <Link
                   to={`/category/${link?._id}`}
-                  className="text-white hover:bg-gray-100 text-[16px] font-bold hover:text-black px-3 py-4"
+                  className="text-black flex gap-2 hover:bg-gray-100 text-[16px] font-bold hover:text-black px-3 py-4"
                   onClick={handleLinkClick}
                 >
+
+                <img src={link?.image} alt="" className=" h-6" />
                   {link?.name}
                 </Link>
                 {link?.subCategories && link?.subCategories?.length > 0 && (
@@ -119,7 +121,7 @@ const Navbar = () => {
           </button>
 
           <div className="lg:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-white">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-black">
               <FaBars size={24} />
             </button>
           </div>
@@ -135,7 +137,7 @@ const Navbar = () => {
         } lg:hidden`}
       >
         <div className="flex justify-between items-center p-4 bg-black">
-          <div className="text-white text-2xl font-bold">दिव्य निर्भर</div>
+          <div className="text-white text-2xl font-bold">Sky News</div>
           <button
             onClick={() => setIsOpen(false)}
             className="text-white text-3xl"

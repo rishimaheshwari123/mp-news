@@ -5,12 +5,12 @@ const News = require("../models/newsModel")
 // Create a new category
 const createCategory = async (req, res) => {
   console.log(req)
-  const { name, description } = req.body;
+  const { name, description,image } = req.body;
   try {
     const newCategory = new Category({
       name,
       description,
-      // image,
+      image,
       subCategories: [],
     });
     await newCategory.save();
