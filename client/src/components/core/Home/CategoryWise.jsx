@@ -11,20 +11,28 @@ function CategoryWise() {
     .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 3);
 
-  const rajniti = allNews
-    .filter((news) => news?.category?._id === "66e431ef2e7cb69596941450")
+  const videsh = allNews
+    .filter((news) => news?.category?._id === "66e71349fb7bfd9e1e73e207")
     .sort((a, b) => new Date(b.publish) - new Date(a.publish))
     .slice(0, 4);
-  const crime = allNews
-    .filter((news) => news?.category?._id === "66e431fb2e7cb69596941454")
+  const desh = allNews
+    .filter((news) => news?.category?._id === "66e712d4fb7bfd9e1e73e1ff")
     .sort((a, b) => new Date(b.publish) - new Date(a.publish))
     .slice(0, 4);
-  const mp = allNews
-    .filter((news) => news?.category?._id === "66e432022e7cb69596941458")
+  const khel = allNews
+    .filter((news) => news?.category?._id === "66e71371fb7bfd9e1e73e20b")
     .sort((a, b) => new Date(b.publish) - new Date(a.publish))
     .slice(0, 4);
-  const distrik = allNews
-    .filter((news) => news?.category?._id === "66e4320c2e7cb6959694145c")
+  const topNews = allNews
+    .filter((news) => news?.category?._id === "66e71256fb7bfd9e1e73e1c5")
+    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .slice(0, 4);
+  const lifeStyle = allNews
+    .filter((news) => news?.category?._id === "66e713d2fb7bfd9e1e73e213")
+    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .slice(0, 4);
+  const tech = allNews
+    .filter((news) => news?.category?._id === "66e7140afb7bfd9e1e73e217")
     .sort((a, b) => new Date(b.publish) - new Date(a.publish))
     .slice(0, 4);
 
@@ -49,28 +57,28 @@ function CategoryWise() {
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Maharashtra Section */}
         <div className="lg:col-span-1">
-          <h2 className="font-bold text-2xl mb-4">राजनीति</h2>
+          <h2 className="font-bold text-2xl mb-4">विदेश</h2>
           <div className="grid gap-4">
             {/* Top news with larger image */}
-            {rajniti[0] && (
-              <Link to={`/${rajniti[0]?.slug}`} className="relative">
+            {videsh[0] && (
+              <Link to={`/${videsh[0]?.slug}`} className="relative">
                 <img
-                  src={rajniti[0]?.images[0]?.url}
+                  src={videsh[0]?.images[0]?.url}
                   alt=""
                   className="h-[250px] lg:h-[300px] w-full object-cover"
                 />
                 <p className="font-semibold text-lg mt-2">
-                  {truncateText(rajniti[0]?.title, 10)}
+                  {truncateText(videsh[0]?.title, 10)}
                 </p>
                 <p className="text-gray-400 text-sm">
-                  {formatDate(rajniti[0]?.createdAt)}
+                  {formatDate(videsh[0]?.createdAt)}
                 </p>
               </Link>
             )}
 
             {/* Smaller news items */}
             <div className="grid grid-cols-1 gap-4">
-              {rajniti.slice(1).map((news) => (
+              {videsh.slice(1).map((news) => (
                 <Link
                   to={`/${news?.slug}`}
                   key={news._id}
@@ -97,27 +105,27 @@ function CategoryWise() {
 
         {/* Bharat Section */}
         <div className="lg:col-span-1">
-          <h2 className="font-bold text-2xl mb-4">क्राइम</h2>
+          <h2 className="font-bold text-2xl mb-4">देश</h2>
           <div className="grid gap-4">
             {/* Top news with larger image */}
-            {crime[0] && (
-              <Link to={`/${crime[0]?.slug}`} className="relative">
+            {desh[0] && (
+              <Link to={`/${desh[0]?.slug}`} className="relative">
                 <img
-                  src={crime[0]?.images[0]?.url}
+                  src={desh[0]?.images[0]?.url}
                   alt=""
                   className="h-[250px] lg:h-[300px] w-full object-cover"
                 />
                 <p className="font-semibold text-lg mt-2">
-                  {truncateText(crime[0]?.title, 10)}
+                  {truncateText(desh[0]?.title, 10)}
                 </p>
                 <p className="text-gray-400 text-sm">
-                  {formatDate(crime[0]?.createdAt)}
+                  {formatDate(desh[0]?.createdAt)}
                 </p>
               </Link>
             )}
 
             <div className="grid grid-cols-1 gap-4">
-              {crime.slice(1).map((news) => (
+              {desh.slice(1).map((news) => (
                 <Link
                   to={`/${news?.slug}`}
                   key={news._id}
@@ -152,28 +160,28 @@ function CategoryWise() {
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Maharashtra Section */}
         <div className="lg:col-span-1">
-          <h2 className="font-bold text-2xl mb-4">अपना मध्यप्रदेश</h2>
+          <h2 className="font-bold text-2xl mb-4">खेल</h2>
           <div className="grid gap-4">
             {/* Top news with larger image */}
-            {mp[0] && (
-              <Link to={`/${mp[0]?.slug}`} className="relative">
+            {khel[0] && (
+              <Link to={`/${khel[0]?.slug}`} className="relative">
                 <img
-                  src={mp[0]?.images[0]?.url}
+                  src={khel[0]?.images[0]?.url}
                   alt=""
                   className="h-[250px] lg:h-[300px] w-full object-cover"
                 />
                 <p className="font-semibold text-lg mt-2">
-                  {truncateText(mp[0]?.title, 10)}
+                  {truncateText(khel[0]?.title, 10)}
                 </p>
                 <p className="text-gray-400 text-sm">
-                  {formatDate(mp[0]?.createdAt)}
+                  {formatDate(khel[0]?.createdAt)}
                 </p>
               </Link>
             )}
 
             {/* Smaller news items */}
             <div className="grid grid-cols-1 gap-4">
-              {mp.slice(1).map((news) => (
+              {khel.slice(1).map((news) => (
                 <Link
                   to={`/${news?.slug}`}
                   key={news._id}
@@ -200,27 +208,125 @@ function CategoryWise() {
 
         {/* Bharat Section */}
         <div className="lg:col-span-1">
-          <h2 className="font-bold text-2xl mb-4">आपका जिला</h2>
+          <h2 className="font-bold text-2xl mb-4">टॉप न्यूज़</h2>
           <div className="grid gap-4">
             {/* Top news with larger image */}
-            {distrik[0] && (
-              <Link to={`/${distrik[0]?.slug}`} className="relative">
+            {topNews[0] && (
+              <Link to={`/${topNews[0]?.slug}`} className="relative">
                 <img
-                  src={distrik[0]?.images[0]?.url}
+                  src={topNews[0]?.images[0]?.url}
                   alt=""
                   className="h-[250px] lg:h-[300px] w-full object-cover"
                 />
                 <p className="font-semibold text-lg mt-2">
-                  {truncateText(distrik[0]?.title, 10)}
+                  {truncateText(topNews[0]?.title, 10)}
                 </p>
                 <p className="text-gray-400 text-sm">
-                  {formatDate(distrik[0]?.createdAt)}
+                  {formatDate(topNews[0]?.createdAt)}
                 </p>
               </Link>
             )}
 
             <div className="grid grid-cols-1 gap-4">
-              {distrik.slice(1).map((news) => (
+              {topNews.slice(1).map((news) => (
+                <Link
+                  to={`/${news?.slug}`}
+                  key={news._id}
+                  className="flex gap-3"
+                >
+                  <img
+                    src={news?.images[0]?.url}
+                    alt=""
+                    className="h-[65px] min-w-[110px]"
+                  />
+                  <div>
+                    <p className="font-semibold text-sm">
+                      {truncateText(news?.title, 20)}
+                    </p>
+                    <p className="text-gray-400 text-xs">
+                      {formatDate(news?.createdAt)}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <br />
+
+      <div className="grid lg:grid-cols-2 gap-8">
+        <div className="lg:col-span-1">
+          <h2 className="font-bold text-2xl mb-4">लाइफ स्टाइल</h2>
+          <div className="grid gap-4">
+            {lifeStyle[0] && (
+              <Link to={`/${lifeStyle[0]?.slug}`} className="relative">
+                <img
+                  src={lifeStyle[0]?.images[0]?.url}
+                  alt=""
+                  className="h-[250px] lg:h-[300px] w-full object-cover"
+                />
+                <p className="font-semibold text-lg mt-2">
+                  {truncateText(lifeStyle[0]?.title, 10)}
+                </p>
+                <p className="text-gray-400 text-sm">
+                  {formatDate(lifeStyle[0]?.createdAt)}
+                </p>
+              </Link>
+            )}
+
+            {/* Smaller news items */}
+            <div className="grid grid-cols-1 gap-4">
+              {lifeStyle.slice(1).map((news) => (
+                <Link
+                  to={`/${news?.slug}`}
+                  key={news._id}
+                  className="flex gap-3"
+                >
+                  <img
+                    src={news?.images[0]?.url}
+                    alt=""
+                    className="h-[65px] min-w-[110px]"
+                  />
+                  <div>
+                    <p className="font-semibold text-sm">
+                      {truncateText(news?.title, 20)}
+                    </p>
+                    <p className="text-gray-400 text-xs">
+                      {formatDate(news?.createdAt)}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bharat Section */}
+        <div className="lg:col-span-1">
+          <h2 className="font-bold text-2xl mb-4">टेक-ऑटो</h2>
+          <div className="grid gap-4">
+            {/* Top news with larger image */}
+            {tech[0] && (
+              <Link to={`/${tech[0]?.slug}`} className="relative">
+                <img
+                  src={tech[0]?.images[0]?.url}
+                  alt=""
+                  className="h-[250px] lg:h-[300px] w-full object-cover"
+                />
+                <p className="font-semibold text-lg mt-2">
+                  {truncateText(tech[0]?.title, 10)}
+                </p>
+                <p className="text-gray-400 text-sm">
+                  {formatDate(tech[0]?.createdAt)}
+                </p>
+              </Link>
+            )}
+
+            <div className="grid grid-cols-1 gap-4">
+              {tech.slice(1).map((news) => (
                 <Link
                   to={`/${news?.slug}`}
                   key={news._id}

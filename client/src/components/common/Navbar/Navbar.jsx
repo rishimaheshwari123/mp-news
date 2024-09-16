@@ -142,19 +142,28 @@ const Navbar = () => {
         <SearchBox isOpen={isSearchOpen} toggleSearch={toggleSearch} />
 
         <div className="flex overflow-x-scroll space-x-4 p-4">
-          {categories.map((link, index) => (
+          <div className="flex gap-3">
+            {" "}
             <Link
-              key={index}
-              to={`/category/${link?._id}`}
-              className="text-xl font-semibold whitespace-nowrap "
-              onClick={handleLinkClick}
+              to="/"
+              className="flex lg:hidden lg:text-black lg:mr-3 lg:mt-[19px]"
             >
-              <div className="flex gap-3">
-                <img src={link?.image} alt="" className=" h-6" />
-                <p className="mr-5"> {link?.name}</p>
-              </div>
+              <FaHome size={22} />
             </Link>
-          ))}
+            {categories.map((link, index) => (
+              <Link
+                key={index}
+                to={`/category/${link?._id}`}
+                className="text-xl font-semibold whitespace-nowrap "
+                onClick={handleLinkClick}
+              >
+                <div className="flex gap-3">
+                  <img src={link?.image} alt="" className=" h-6" />
+                  <p className="mr-5"> {link?.name}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </nav>

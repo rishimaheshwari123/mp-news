@@ -3,17 +3,22 @@ import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
 import { fetchSingleCategory } from "../services/operations/admin";
 import CricketLive from "../components/core/Home/RightSide/CricketLive";
-import NewsActive from "../components/core/Home/RightSide/NewsActive";
 import Contact from "../components/core/singleNews/Contact";
 import { useSelector } from "react-redux";
 
 const CategoryPage = () => {
+  const { allNews } = useSelector((state) => state.news);
+
   const [category, setCategory] = useState(null);
   const [news, setNews] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const itemsPerPage = 10;
   const { id } = useParams();
+
+  const all = [...allNews]
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 6);
 
   const fetchCategoryData = async (id, currentPage, itemsPerPage) => {
     try {
@@ -36,8 +41,6 @@ const CategoryPage = () => {
       ? words.slice(0, wordLimit).join(" ") + "..."
       : text;
   };
-
-  const { allNews } = useSelector((state) => state.news);
 
   // Filter news items based on the category ID from the URL params
   const filteredNews = allNews.filter(
@@ -234,7 +237,35 @@ const CategoryPage = () => {
 
         {/* New News */}
         <div className="lg:w-[30%]">
-          <NewsActive />
+          <div>
+            <div className="mt-[50px]">
+              <div className=" flex justify-between mb-4 relative">
+                <p className=" min-w-full min-h-[2px] bg-[#ed0302] absolute bottom-0 "></p>
+                <p className=" flex items-center gap-2 font-bold text-lg bg-[#ed0302] text-white p-2 relative wf">
+                  ALL News
+                </p>
+              </div>
+
+              <div>
+                <div className="flex gap-3 grid-cols-1  mt-8 p-2 flex-col">
+                  {all?.map((currElem) => (
+                    <Link to={`/${currElem?.slug}`} key={currElem._id}>
+                      <div className="flex gap-3">
+                        <img
+                          src={currElem?.images[0]?.url}
+                          alt=""
+                          className="w-[105px]"
+                        />
+                        <p className="text-wrap mt-2 text-sm">
+                          {truncateText(currElem.title, 10)}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="mt-[50px]">
             <div className="flex justify-between mb-4 relative">
               <p className="min-w-full min-h-[2px] bg-[#ed0302] absolute bottom-0"></p>

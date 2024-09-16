@@ -21,10 +21,9 @@ function SingleNews() {
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
 
-  const mp = allNews
-    .filter((news) => news?.category?._id === "66e432022e7cb69596941458")
-    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
-    .slice(0, 2);
+  const all = [...allNews]
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 6);
 
   const truncateText = (text, wordLimit) => {
     const words = text.split(" ");
@@ -174,13 +173,13 @@ function SingleNews() {
               <div className=" flex justify-between mb-4 relative">
                 <p className=" min-w-full min-h-[2px] bg-[#ed0302] absolute bottom-0 "></p>
                 <p className=" flex items-center gap-2 font-bold text-lg bg-[#ed0302] text-white p-2 relative wf">
-                  अपना मध्यप्रदेश
+                  ALL News
                 </p>
               </div>
 
               <div>
                 <div className="flex gap-3 grid-cols-1  mt-8 p-2 flex-col">
-                  {mp?.map((currElem) => (
+                  {all?.map((currElem) => (
                     <Link to={`/${currElem?.slug}`} key={currElem._id}>
                       <div className="flex gap-3">
                         <img
