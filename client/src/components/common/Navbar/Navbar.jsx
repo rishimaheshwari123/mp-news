@@ -130,7 +130,7 @@ const Navbar = () => {
       <div className="lg:hidden">
         <div className="flex justify-between px-5">
           <div>
-            <img src={logo} alt="not found" className="w-16 h-12" />
+            <img src={logo} alt="not found" className=" h-16" />
           </div>
           <button
             onClick={toggleSearch}
