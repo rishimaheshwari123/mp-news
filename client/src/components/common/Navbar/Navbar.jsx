@@ -5,6 +5,7 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { useSelector } from "react-redux";
 import { fetchCategory } from "../../../services/operations/admin";
 import SearchBox from "./SearchBox";
+import logo from "../../../assests/logo.jpg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -79,7 +80,10 @@ const Navbar = () => {
     <nav className="bg-white border-black border ">
       <div className="max-w-7xl mx-auto flex items-center justify-between py-2 px-4">
         <div className="flex">
-          <Link to="/" className="text-black lg:mr-3 lg:mt-[19px]">
+          <Link
+            to="/"
+            className="hidden lg:flex lg:text-black lg:mr-3 lg:mt-[19px]"
+          >
             <FaHome size={22} />
           </Link>
           <div className="hidden lg:flex lg:mt-[2px]">
@@ -90,8 +94,7 @@ const Navbar = () => {
                   className="text-black flex gap-2 hover:bg-gray-100 text-[16px] font-bold hover:text-black px-3 py-4"
                   onClick={handleLinkClick}
                 >
-
-                <img src={link?.image} alt="" className=" h-6" />
+                  <img src={link?.image} alt="" className=" h-6" />
                   {link?.name}
                 </Link>
                 {link?.subCategories && link?.subCategories?.length > 0 && (
@@ -112,78 +115,45 @@ const Navbar = () => {
             ))}
           </div>
         </div>
-        <div className="flex items-center space-x-4">
+        <div className="hidden lg:flex items-center space-x-4">
           <button
             onClick={toggleSearch}
             className="text-white bg-gray-200 rounded-md p-2"
           >
             <FaSearch className="text-black" />
           </button>
-
-          <div className="lg:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className="text-black">
-              <FaBars size={24} />
-            </button>
-          </div>
-
           <SearchBox isOpen={isSearchOpen} toggleSearch={toggleSearch} />
         </div>
       </div>
 
       {/* Sidebar for Small Devices */}
-      <div
-        className={`fixed top-0 left-0 h-full w-[80%] bg-white z-50 transition-transform transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:hidden`}
-      >
-        <div className="flex justify-between items-center p-4 bg-black">
-          <div className="text-white text-2xl font-bold">Sky News</div>
+      <div className="lg:hidden">
+        <div className="flex justify-between px-5">
+          <div>
+            <img src={logo} alt="not found" className="w-16 h-12" />
+          </div>
           <button
-            onClick={() => setIsOpen(false)}
-            className="text-white text-3xl"
+            onClick={toggleSearch}
+            className="text-white bg-gray-200 rounded-md p-2"
           >
-            &times;
+            <FaSearch className="text-black" />
           </button>
         </div>
-        <div className="p-4 space-y-2">
+        <SearchBox isOpen={isSearchOpen} toggleSearch={toggleSearch} />
+
+        <div className="flex overflow-x-scroll space-x-4 p-4">
           {categories.map((link, index) => (
-            <div key={index} className="border-b border-gray-200">
-              <div
-                className="flex justify-between items-center text-black cursor-pointer"
-                onClick={() => handleDropdownToggle(index, link.subCategories)}
-              >
-                <Link
-                  to={`/category/${link?._id}`}
-                  className="text-xl font-semibold"
-                  onClick={handleLinkClick}
-                >
-                  {link?.name}
-                </Link>
-                {link.subCategories && link?.subCategories?.length > 0 && (
-                  <>
-                    {openDropdown === index ? (
-                      <AiOutlineMinus className="text-black text-2xl" />
-                    ) : (
-                      <AiOutlinePlus className="text-black text-2xl" />
-                    )}
-                  </>
-                )}
+            <Link
+              key={index}
+              to={`/category/${link?._id}`}
+              className="text-xl font-semibold whitespace-nowrap "
+              onClick={handleLinkClick}
+            >
+              <div className="flex gap-3">
+                <img src={link?.image} alt="" className=" h-6" />
+                <p className="mr-5"> {link?.name}</p>
               </div>
-              {openDropdown === index && link.subCategories && (
-                <div className="pl-4">
-                  {link.subCategories.map((sublink, subIndex) => (
-                    <Link
-                      key={subIndex}
-                      to={`/subcategory/${sublink?._id}`}
-                      className="block text-black py-1"
-                      onClick={handleLinkClick}
-                    >
-                      {sublink.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+            </Link>
           ))}
         </div>
       </div>

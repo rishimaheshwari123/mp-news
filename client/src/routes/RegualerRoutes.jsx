@@ -21,7 +21,9 @@ function RegualerRoutes() {
   return (
     <>
       <SubNavbar />
-      <LogoSpace />
+      <div className="hidden lg:block">
+        <LogoSpace />
+      </div>
       <Navbar />
       {/* <StateSubcategories /> */}
       <br />
