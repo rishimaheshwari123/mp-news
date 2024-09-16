@@ -36,45 +36,35 @@ const Navbar = () => {
     const fetchCategories = async () => {
       try {
         const categoriesData = await fetchCategory();
-
-        // Filter out the "राज्य" category
-        const filteredCategories =
-          categoriesData?.categories.filter(
-            (cat) => cat.name.trim() !== "राज्य"
-          ) || [];
-
-        reorderCategories(filteredCategories);
+        reorderCategories(categoriesData);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
-
+  
     if (category.length !== 0) {
-      // Filter out the "राज्य" category from existing data
-      const filteredCategories = category.filter(
-        (cat) => cat.name.trim() !== "राज्य"
-      );
-
-      reorderCategories(filteredCategories);
+      reorderCategories(category);
     } else {
       fetchCategories();
     }
   }, [category]);
+  
 
   const reorderCategories = (categoriesList) => {
-    const fixedOrder = ["विदेश", "देश", "मनोरंजन", "खेल"];
+    const fixedOrder = ["टॉप न्यूज़", "देश", "राज्य", "विदेश", "खेल", "बाज़ार"];
     const orderedCategories = fixedOrder
       .map((fixedCat) =>
         categoriesList.find((cat) => cat.name.trim() === fixedCat)
       )
       .filter(Boolean);
-
+  
     const remainingCategories = categoriesList.filter(
       (cat) => !fixedOrder.includes(cat.name.trim())
     );
-
+  
     setCategories([...orderedCategories, ...remainingCategories]);
   };
+  
 
   return (
     <nav className="bg-white border-black border ">
