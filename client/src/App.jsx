@@ -7,12 +7,24 @@ import AdminRoutes from "./routes/AdminRoutes";
 import RegualerRoutes from "./routes/RegualerRoutes";
 import Error from "./pages/Error";
 import { saveCategory } from "./redux/newsSlice";
+import axios from "axios";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
 
   const dispatch = useDispatch();
 
+
+
+  const visitAdd = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/visit`);
+      
+    } catch (error) {
+      console.error('Failed to add visit record dashboard ', error);
+    }
+  };
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -22,10 +34,14 @@ function App() {
         console.error("Error fetching categories:", error);
       }
     };
-
+    visitAdd()
     fetchCategories();
     dispatch(getAllNews());
   }, []);
+
+
+
+
   return (
     <div className="">
     <Routes>

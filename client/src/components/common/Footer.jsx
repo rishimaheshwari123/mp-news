@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
@@ -9,9 +9,33 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import logo from "../../assests/logo.jpg";
+import axios from "axios";
 
 const Footer = () => {
   const { token } = useSelector((state) => state.auth);
+
+
+  const BASE_URL = process.env.REACT_APP_BASE_URL;
+  const [stats, setStats] = useState({
+    totalUsers: 0,
+    totalVisits: 0,
+    totalNews: 0,
+    totalCategories: 0,
+    totalSubCategories: 0,
+  });
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/dashboard`);
+        setStats(response.data);
+      } catch (error) {
+        console.error('Failed to fetch dashboard statistics', error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
 
   return (
     <footer className="bg-black text-white ">
@@ -139,6 +163,9 @@ const Footer = () => {
           Made
         </a>{" "}
         by - I Next Ets
+        <br />
+        <p className=" mt-3">   Visits :- {stats.totalVisits}</p>
+
       </div>
     </footer>
   );
