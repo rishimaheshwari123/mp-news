@@ -72,9 +72,9 @@ function SingleNews() {
               </p>
 
               
-              <p className=" flex gap-2 items-center">
+              {/* <p className=" flex gap-2 items-center">
                   <FaRegEye className=" text-blue-800" /> {news?.view}
-                </p>
+                </p> */}
            </div>
             </div>
 

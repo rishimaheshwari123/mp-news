@@ -280,7 +280,7 @@ function AddNews() {
         </div>
 
         {/* Description */}
-        <div className="space-y-2">
+        <div className="space-y-2 min-h-[400px]">
           <label
             htmlFor="description"
             className="block font-medium text-gray-700"
@@ -291,6 +291,7 @@ function AddNews() {
             theme="snow"
             value={editorHtml}
             onChange={handleChange}
+            style={{ height: "400px" }}
             modules={{
               toolbar: [
                 [{ header: "1" }, { header: "2" }, { font: [] }],
@@ -305,12 +306,12 @@ function AddNews() {
                 ["clean"],
               ],
             }}
-            className="quill-editor"
+            className="quill-editor  "
           />
         </div>
 
         {/* Language, Type, Category, Subcategory */}
-        <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-4">
+        <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-4 pt-[50px]">
           <div className="space-y-2">
             <label
               htmlFor="language"
