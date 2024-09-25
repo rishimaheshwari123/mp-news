@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getSingleNews } from "../services/operations/admin";
 import { Link, useParams } from "react-router-dom";
 import { format } from "date-fns";
-import { FaClock } from "react-icons/fa";
+import { FaClock, FaRegEye } from "react-icons/fa";
 import {
   FaFacebookF,
   FaTwitter,
@@ -64,11 +64,18 @@ function SingleNews() {
           <div>
             <div>
               <p className=" font-semibold text-2xl font-sans">{news?.title}</p>
-              <p>
+           <div className=" flex gap-3 items-center">
+           <p>
                 {news?.createdAt
                   ? formatDate(news.createdAt)
                   : "Date not available"}
               </p>
+
+              
+              {/* <p className=" flex gap-2 items-center">
+                  <FaRegEye className=" text-blue-800" /> {news?.view}
+                </p> */}
+           </div>
             </div>
 
             <div className="flex space-x-4 mt-4">
