@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Navigation,
   Pagination,
@@ -12,29 +12,24 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
-import { fetchBreakingNews } from "../../../services/operations/admin";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const BreakingNews = () => {
   const [visible, setVisible] = useState(true);
-  const [breakingNews, setBreakingNews] = useState([]);
 
-  useEffect(() => {
-    const fetchBreakingNewsList = async () => {
-      try {
-        const response = await fetchBreakingNews();
-        setBreakingNews(response || []);
-      } catch (error) {
-        console.error("Error fetching breaking news:", error);
-      }
-    };
+  const { allNews } = useSelector((state) => state.news);
 
-    fetchBreakingNewsList();
-  }, []);
+  const breakingNews = [...allNews]
+    .filter((news) => news.type === "breaking-news")
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 3);
 
+  console.log(breakingNews);
   return (
     <>
-      {visible && (
-        <div className="max-w-7xl mx-auto relative bg-yellow-500  overflow-hidden">
+      {visible && breakingNews.length > 0 && (
+        <div className="max-w-7xl mx-auto relative bg-yellow-500 overflow-hidden">
           <div className="max-w-7xl mx-auto relative flex items-center">
             <p className="text-[16px] bg-white py-3 sm:text-[20px] lg:text-2xl font-bold text-red-600 px-2 uppercase">
               Breaking News
@@ -47,18 +42,18 @@ const BreakingNews = () => {
               loop={true}
               className="flex-1"
             >
-              {breakingNews.map(
-                (currElem, index) =>
-                  currElem.active && (
-                    <SwiperSlide key={index}>
-                      <div className="bg-yellow-500 text-white px-4 py-1">
-                        <p className="text-[14px] sm:text-[18px] lg:text-xl font-semibold text-white">
-                          {currElem.name}
-                        </p>
-                      </div>
-                    </SwiperSlide>
-                  )
-              )}
+              {breakingNews.map((currElem, index) => (
+                <SwiperSlide key={index}>
+                  <div className="bg-yellow-500 text-white px-4 py-1">
+                    <Link
+                      to={currElem.slug}
+                      className="text-[14px] sm:text-[18px] lg:text-xl font-semibold text-white"
+                    >
+                      {currElem.title}
+                    </Link>
+                  </div>
+                </SwiperSlide>
+              ))}
             </Swiper>
           </div>
         </div>

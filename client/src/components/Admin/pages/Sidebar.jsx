@@ -63,7 +63,7 @@ const Sidebar = () => {
     { to: "/admin/dashboard", icon: <FcBullish />, label: "Dashboard" },
     { to: "/admin/addnews", icon: <FcPlus />, label: "Add News" },
     { to: "/admin/allnews", icon: <FcPieChart />, label: "All News" },
-    { to: "/admin/breaking", icon: <FcNews />, label: "Breaking News" },
+    { to: "/admin/breaking", icon: <FcNews />, label: "Breaking Text" },
     { to: "/admin/category", icon: <FcTreeStructure />, label: "Category" },
     {
       to: "/admin/subcategory",

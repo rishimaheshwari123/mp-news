@@ -1,11 +1,12 @@
 import React from "react";
 import logo from "../../../assests/logo.jpg";
+import { Link } from "react-router-dom";
 function LogoSpace() {
   return (
     <div className=" max-w-7xl py-2 mx-auto  ">
-      <div className=" flex justify-center m ">
+      <Link to={"/"} className=" flex justify-center m ">
         <img src={logo} alt="" className="lg:max-h-[150px] max-h-[100px]" />
-      </div>
+      </Link>
     </div>
   );
 }

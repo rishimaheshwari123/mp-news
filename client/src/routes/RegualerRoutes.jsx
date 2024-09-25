@@ -15,6 +15,7 @@ import SingleNews from "../pages/SingleNews";
 import CategoryPage from "../pages/CategoryDetails";
 import SubCategoryPage from "../pages/SubcategoryDetails";
 import LogoSpace from "../components/common/Navbar/LogoSpace";
+import BreakingText from "../components/core/Home/BreakingText";
 // import StateSubcategories from "../components/common/Navbar/StateSubcategories";
 
 function RegualerRoutes() {
@@ -26,8 +27,9 @@ function RegualerRoutes() {
       </div>
       <Navbar />
       {/* <StateSubcategories /> */}
-      <br />
       <BreakingNews />
+      <br />
+      <BreakingText />
       {/* <div className="h-screen w-screen bg-white"></div> */}
       <Routes>
         <Route path="/" element={<Home />} />
