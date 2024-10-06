@@ -13,27 +13,27 @@ function CategoryWise() {
 
   const videsh = allNews
     .filter((news) => news?.category?._id === "66e71349fb7bfd9e1e73e207")
-    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 4);
   const desh = allNews
     .filter((news) => news?.category?._id === "66e712d4fb7bfd9e1e73e1ff")
-    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 4);
   const khel = allNews
     .filter((news) => news?.category?._id === "66e71371fb7bfd9e1e73e20b")
-    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 4);
   const topNews = allNews
     .filter((news) => news?.category?._id === "66e71256fb7bfd9e1e73e1c5")
-    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 4);
   const lifeStyle = allNews
     .filter((news) => news?.category?._id === "66e713d2fb7bfd9e1e73e213")
-    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 4);
   const tech = allNews
     .filter((news) => news?.category?._id === "66e7140afb7bfd9e1e73e217")
-    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 4);
 
   const truncateText = (text, wordLimit) => {

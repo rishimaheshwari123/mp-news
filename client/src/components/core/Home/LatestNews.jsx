@@ -22,7 +22,7 @@ function LatestNews() {
 
   const latestNews = allNews
     .filter((news) => news.type === "big-news")
-    .sort((a, b) => new Date(b.publish) - new Date(a.publish))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
     .slice(0, 10); // Increase the slice as needed to have more news items
 
   const truncateText = (text, wordLimit) => {

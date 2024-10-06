@@ -365,7 +365,7 @@ export const deleteNews = async (id, token) => {
 
   } catch (error) {
     console.log(error)
-    toast.error("Error in deleting news")
+    // toast.error("Error in deleting news")
   }
 };
 
