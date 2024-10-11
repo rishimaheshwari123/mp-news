@@ -93,18 +93,28 @@ const getCategoryById = async (req, res) => {
       return res.status(404).json({ success: false, message: "Category not found" });
     }
 
-    const news = await News.find({ category: categoryId, ...queryFilters })
-    .skip((page - 1) * limit)
-    .limit(parseInt(limit));
+    // Step 1: Fetch all the news for the category and sort by 'publish' or 'createdAt' first
+    let allNews = await News.find({ category: categoryId, ...queryFilters });
+
+    // Sort news items by 'publish' date or fallback to 'createdAt'
+    allNews.sort((a, b) => {
+      const publishA = new Date(a.publish || a.createdAt);
+      const publishB = new Date(b.publish || b.createdAt);
+      return publishB - publishA; // Sort in descending order (latest first)
+    });
+
+    // Step 2: Paginate after sorting
+    const paginatedNews = allNews.slice((page - 1) * limit, page * limit);
+
     // Prepare the response object
     const response = {
       success: true,
       category,
-      news,
+      news: paginatedNews,
       pagination: {
         page: parseInt(page),
         limit: parseInt(limit),
-        total: await News.countDocuments({ category: categoryId, ...queryFilters }),
+        total: allNews.length, // Total number of sorted news items
       },
     };
 

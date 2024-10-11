@@ -24,6 +24,7 @@ const CategoryPage = () => {
     try {
       const response = await fetchSingleCategory(id, currentPage, itemsPerPage);
       setCategory(response.category);
+      console.log(response.category)
       setNews(response.news);
       setTotalPages(Math.ceil(response.pagination.total / itemsPerPage));
     } catch (error) {
@@ -47,11 +48,18 @@ const CategoryPage = () => {
     (newsItem) => newsItem?.category?._id === id
   );
 
+  
   // Sort the filtered news items by the publish date
-  const sortedNews = filteredNews.sort(
-    (a, b) => new Date(b.publish) - new Date(a.publish)
-  );
+  // const sortedNews = news.sort(
+  //   (a, b) => new Date(b.publish) - new Date(a.publish)
+  // );
 
+  const sortedNews = [...news].flat().sort((a, b) => {
+    const dateA = new Date(a.createdAt);
+    const dateB = new Date(b.createdAt);
+   
+    return dateB - dateA;
+  });
   useEffect(() => {
     console.log("Filtered and Sorted News:", sortedNews);
   }, [sortedNews]);
